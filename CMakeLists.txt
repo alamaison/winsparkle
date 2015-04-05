@@ -22,6 +22,7 @@
 # DEALINGS IN THE SOFTWARE.
 
 cmake_minimum_required(VERSION 2.8.11)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 project(WinSparkle)
 
@@ -53,10 +54,25 @@ option(BUILD_SHARED_LIBS "Build Shared Libraries" OFF)
 
 include(GNUInstallDirs)
 
+# Package management ###########################################################
+
+include(HunterGate)
+
+HunterGate(
+    URL "https://github.com/alamaison/hunter/archive/7e6cef91a0537e6558739fb79508dfd167c4d45f.tar.gz"
+    SHA1 "3ec7ae8c1d8d3d8fe8ba17d3276efd7f48da86d1"
+)
+
+hunter_add_package(Expat)
+hunter_add_package(wxWidgets)
+
 find_package(EXPAT REQUIRED)
 
 find_package(wxWidgets CONFIG REQUIRED core base)
 include(${wxWidgets_USE_FILE})
+
+################################################################################
+
 
 set(HEADERS
   include/winsparkle.h
