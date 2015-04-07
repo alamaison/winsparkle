@@ -1172,11 +1172,18 @@ void UI::Run()
     // Note: The thread that called UI::Get() holds gs_uiThreadCS
     //       at this point and won't release it until we signal it.
 
-    // We need to pass correct HINSTANCE to wxEntry() and the right value is
-    // HINSTANCE of this DLL, not of the main .exe.
+    // We need to pass correct HINSTANCE to wxEntry() and, if this
+    // code is executing in a DLL, the right value is
+    // HINSTANCE of the DLL, not of the main .exe.
+
+    // See http://stackoverflow.com/a/6924332/67013
+    if ( !ms_hInstance )
+        !GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | 
+            GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+            (LPCSTR) &ms_hInstance, &ms_hInstance);
 
     if ( !ms_hInstance )
-        return; // DllMain() not called? -- FIXME: throw
+        return; // DllMain() not called? Couldn't find HINSTANCE? -- FIXME: throw
 
     // IMPLEMENT_WXWIN_MAIN does this as the first thing
     wxDISABLE_DEBUG_SUPPORT();

@@ -38,11 +38,15 @@
 extern "C" {
 #endif
 
+#ifdef WINSPARKLE_STATIC
+    #define WIN_SPARKLE_API
+#else // WINSPARKLE_STATIC
 #ifdef BUILDING_WIN_SPARKLE
     #define WIN_SPARKLE_API __declspec(dllexport)
 #else
     #define WIN_SPARKLE_API __declspec(dllimport)
-#endif
+#endif // BUILDING_WIN_SPARKLE
+#endif // WINSPARKLE_STATIC
 
 /*--------------------------------------------------------------------------*
                        Initialization and shutdown

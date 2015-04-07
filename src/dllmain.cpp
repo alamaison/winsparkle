@@ -30,6 +30,8 @@
                                DllMain() hook
  *--------------------------------------------------------------------------*/
 
+#ifndef WINSPARKLE_STATIC
+
 extern "C"
 BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID /*lpReserved*/)
 {
@@ -40,3 +42,5 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID /*lpReserved*/)
 
     return TRUE;
 }
+
+#endif
