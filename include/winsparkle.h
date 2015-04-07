@@ -30,10 +30,6 @@
 
 #include "winsparkle-version.h"
 
-#if !defined(BUILDING_WIN_SPARKLE) && defined(_MSC_VER)
-#pragma comment(lib, "WinSparkle.lib")
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
