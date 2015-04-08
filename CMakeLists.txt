@@ -113,6 +113,21 @@ target_compile_definitions(WinSparkle
 
 if(NOT BUILD_SHARED_LIBS)
   target_compile_definitions(WinSparkle PUBLIC WINSPARKLE_STATIC)
+
+  # Make resource files available to be included.  Static libraries cannot
+  # include resources themselves, so the best way to make them available
+  # in the final binary is to include a resource file in the binary's own
+  # resource file
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/include/winsparkle.rc"
+    "UpdateAvailable ICON \"software-update-available.ico\"")
+  file(COPY artwork/software-update-available.ico
+    DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/include/")
+  list(APPEND HEADERS
+    "${CMAKE_CURRENT_BINARY_DIR}/include/winsparkle.rc"
+    "${CMAKE_CURRENT_BINARY_DIR}/include/software-update-available.ico")
+
+  target_include_directories(WinSparkle
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>)
 endif()
 
 target_include_directories(WinSparkle
