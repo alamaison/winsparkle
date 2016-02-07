@@ -1,7 +1,7 @@
 #
 # This file is part of WinSparkle (http://winsparkle.org)
 #
-# Copyright (C) 2015 Alexander Lamaison
+# Copyright (C) 2015, 2016 Alexander Lamaison
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -29,16 +29,16 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(HunterGate)
 
 HunterGate(
-    URL "https://github.com/ruslo/hunter/archive/v0.10.1.tar.gz"
-    SHA1 "8438f646010f12128755f2703fd325ec2369e938"
+    URL "https://github.com/ruslo/hunter/archive/v0.12.42.tar.gz"
+    SHA1 "d1271307bbffe46fbbeeb3778236b2d51644e34d"
 )
-
-hunter_add_package(Expat)
-hunter_add_package(wxWidgets)
 
 ################################################################################
 
 project(WinSparkle)
+
+hunter_add_package(Expat)
+hunter_add_package(wxWidgets)
 
 # Parse version
 
